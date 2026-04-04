@@ -1,14 +1,14 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const closeMenu = () => setMobileOpen(false);
+  const closeMenu = () => setOpen(false);
 
   return (
-    <header className="site-header">
+    <header className="site-header fixed-header">
       <div className="container header-inner">
         <NavLink to="/" className="brand" onClick={closeMenu}>
           <div className="brand-logo">
@@ -16,16 +16,16 @@ export default function Header() {
           </div>
           <div>
             <div className="brand-name">ArMiL</div>
-            <div className="brand-sub">Engineering & Detailing LLC</div>
+            <div className="brand-sub">Engineering &amp; Detailing LLC</div>
           </div>
         </NavLink>
 
         <nav className="desktop-nav">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
-          <NavLink to="/services" className={({ isActive }) => (isActive ? "active" : "")}>Services</NavLink>
-          <NavLink to="/projects" className={({ isActive }) => (isActive ? "active" : "")}>Projects</NavLink>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>Contact</NavLink>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>Home</NavLink>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>About</NavLink>
+          <NavLink to="/services" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>Services</NavLink>
+          <NavLink to="/projects" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>Projects</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>Contact</NavLink>
         </nav>
 
         <div className="header-actions">
@@ -33,17 +33,13 @@ export default function Header() {
             Request a Quote
           </NavLink>
 
-          <button
-            className="mobile-btn"
-            onClick={() => setMobileOpen((v) => !v)}
-            type="button"
-          >
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          <button className="mobile-btn" onClick={() => setOpen(!open)} type="button">
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {mobileOpen && (
+      {open && (
         <div className="mobile-nav">
           <div className="container mobile-nav-inner">
             <NavLink to="/" onClick={closeMenu}>Home</NavLink>

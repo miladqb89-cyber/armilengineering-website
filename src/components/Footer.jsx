@@ -30,12 +30,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="footer-heading">Expertise</div>
+          <div className="footer-heading">Capabilities</div>
           <div className="footer-text">
             <div>Steel Detailing</div>
             <div>Tekla Structures</div>
             <div>Engineering Coordination</div>
-            <div>Construction Support</div>
+            <div>Project Support</div>
           </div>
         </div>
       </div>

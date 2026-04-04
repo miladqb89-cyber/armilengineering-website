@@ -11,7 +11,7 @@ function ModelObject({ modelPath }) {
   );
 }
 
-function ModelLoader() {
+function Loader() {
   return <Html center className="model-loader">Loading 3D model...</Html>;
 }
 
@@ -21,7 +21,7 @@ export default function ModelViewer({ modelPath }) {
       <Canvas camera={{ position: [4, 3, 6], fov: 45 }}>
         <ambientLight intensity={1.2} />
         <directionalLight position={[5, 5, 5]} intensity={1.4} />
-        <Suspense fallback={<ModelLoader />}>
+        <Suspense fallback={<Loader />}>
           <Environment preset="city" />
           <ModelObject modelPath={modelPath} />
         </Suspense>

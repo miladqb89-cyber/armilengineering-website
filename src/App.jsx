@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment, Html, Center, useGLTF } from "@react-three/drei";
 import {
   Phone,
   Mail,
@@ -64,7 +66,7 @@ const sections = [
     intro:
       "Our portfolio reflects a commitment to technical excellence, attention to detail, and dependable delivery. Each project is approached with a tailored strategy to meet unique structural and architectural requirements.",
     body:
-      "Project imagery below now uses real image files from your public/images folder.",
+      "Project imagery below uses your project image files, and selected projects can also include interactive 3D previews.",
   },
   {
     id: "contact",
@@ -145,6 +147,9 @@ const projects = [
   {
     title: "Kite Stair, MD",
     image: "project-kite-stair.jpg",
+    imageClass: "contain-image",
+    has3D: true,
+    model: "/models/steel-model.glb",
     address: "9021 Bennett Creek Blvd, Urbana, MD 21704",
     type: "Custom Stair System",
     scope: "Custom stair detailing and connection coordination",
@@ -309,9 +314,127 @@ function ContactFormCard() {
   );
 }
 
+function ModelObject({ modelPath }) {
+  const { scene } = useGLTF(modelPath);
+  return (
+    <Center>
+      <primitive object={scene} scale={1} />
+    </Center>
+  );
+}
+
+function ModelLoader() {
+  return <Html center className="model-loader">Loading 3D model...</Html>;
+}
+
+function ModelViewer({ modelPath }) {
+  return (
+    <div className="model-viewer-wrap">
+      <Canvas camera={{ position: [4, 3, 6], fov: 45 }}>
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 5, 5]} intensity={1.4} />
+        <Suspense fallback={<ModelLoader />}>
+          <Environment preset="city" />
+          <ModelObject modelPath={modelPath} />
+        </Suspense>
+        <OrbitControls enablePan={false} minDistance={2} maxDistance={12} />
+      </Canvas>
+    </div>
+  );
+}
+
+function ModelModal({ open, onClose, title, modelPath }) {
+  if (!open) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="model-modal-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          className="model-modal-panel"
+          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.98 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="model-modal-header">
+            <div>
+              <div className="mini-pill">Interactive 3D Model</div>
+              <h3 className="model-modal-title">{title}</h3>
+            </div>
+            <button className="model-close-btn" onClick={onClose} type="button">
+              <X size={18} />
+            </button>
+          </div>
+
+          <p className="model-modal-text">
+            Rotate the model by hand to explore geometry, proportions, and detailing.
+          </p>
+
+          <ModelViewer modelPath={modelPath} />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function ProjectCard({ project, onOpenModel }) {
+  return (
+    <ScrollCard className="project-card premium-project-card">
+      <div className="project-image-wrap">
+        <img
+          src={`/images/${project.image}`}
+          alt={project.title}
+          className={`project-image ${project.imageClass || ""}`}
+        />
+      </div>
+
+      <div className="project-meta-chip">{project.type}</div>
+      <h3 className="project-title">{project.title}</h3>
+      <p>{project.text}</p>
+
+      {project.has3D && (
+        <div className="project-model-cta">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => onOpenModel(project)}
+          >
+            View 3D Model <ArrowUpRight size={16} />
+          </button>
+        </div>
+      )}
+
+      <div className="project-details">
+        <div>
+          <span>Location</span>
+          <strong>{project.address}</strong>
+        </div>
+        <div>
+          <span>Scope</span>
+          <strong>{project.scope}</strong>
+        </div>
+        <div>
+          <span>Software</span>
+          <strong>{project.software}</strong>
+        </div>
+        <div>
+          <span>Deliverables</span>
+          <strong>{project.deliverables}</strong>
+        </div>
+      </div>
+    </ScrollCard>
+  );
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [activeModelProject, setActiveModelProject] = useState(null);
   const sectionRefs = useRef({});
 
   useEffect(() => {
@@ -332,6 +455,17 @@ export default function App() {
     });
     return () => observers.forEach((o) => o.disconnect());
   }, []);
+
+  useEffect(() => {
+    if (activeModelProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModelProject]);
 
   const scrollToSection = (id) => {
     sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -548,38 +682,11 @@ export default function App() {
                 {section.id === "projects" && (
                   <div className="cards-grid two">
                     {projects.map((project) => (
-                      <ScrollCard key={project.title} className="project-card premium-project-card">
-                        <div className="project-image-wrap">
-                          <img
-                            src={`/images/${project.image}`}
-                            alt={project.title}
-                            className="project-image"
-                          />
-                        </div>
-
-                        <div className="project-meta-chip">{project.type}</div>
-                        <h3 className="project-title">{project.title}</h3>
-                        <p>{project.text}</p>
-
-                        <div className="project-details">
-                          <div>
-                            <span>Location</span>
-                            <strong>{project.address}</strong>
-                          </div>
-                          <div>
-                            <span>Scope</span>
-                            <strong>{project.scope}</strong>
-                          </div>
-                          <div>
-                            <span>Software</span>
-                            <strong>{project.software}</strong>
-                          </div>
-                          <div>
-                            <span>Deliverables</span>
-                            <strong>{project.deliverables}</strong>
-                          </div>
-                        </div>
-                      </ScrollCard>
+                      <ProjectCard
+                        key={project.title}
+                        project={project}
+                        onOpenModel={setActiveModelProject}
+                      />
                     ))}
                   </div>
                 )}
@@ -665,6 +772,13 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <ModelModal
+        open={!!activeModelProject}
+        onClose={() => setActiveModelProject(null)}
+        title={activeModelProject?.title || ""}
+        modelPath={activeModelProject?.model || ""}
+      />
     </div>
   );
 }

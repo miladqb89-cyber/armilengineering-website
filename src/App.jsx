@@ -7,7 +7,7 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
-import Resources from "./pages/Resources
+import Resources from "./pages/Resources";
 
 export default function App() {
   return (

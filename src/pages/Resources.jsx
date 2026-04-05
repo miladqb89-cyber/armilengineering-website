@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   BookOpen,
   Wrench,
@@ -14,90 +14,61 @@ const resources = [
   {
     id: "steel-detailing-basics",
     title: "What is Structural Steel Detailing?",
-    short:
-      "The foundation of fabrication-ready drawings and models.",
+    short: "The foundation of fabrication-ready drawings and models.",
     text:
       "Structural steel detailing is the process of producing detailed drawings and 3D models used for fabrication and erection. These include shop drawings, erection plans, and connection details that guide fabrication shops and field crews throughout construction.",
-    images: [
-      "/images/resource-detailing-1.jpg",
-    ],
+    image: "/images/resource-detailing-1.jpg",
     icon: Layers,
   },
   {
     id: "shop-vs-erection",
     title: "Shop Drawings vs Erection Drawings",
-    short:
-      "Understanding how fabrication and field drawings differ.",
+    short: "Understanding how fabrication and field drawings differ.",
     text:
       "Shop drawings are used in fabrication shops to produce steel components with exact dimensions, welds, and materials. Erection drawings are used on-site to guide installation, showing placement, sequencing, and connections.",
-    images: [
-      "/images/resource-shop-1.jpg",
-    ],
+    image: "/images/resource-shop-1.jpg",
     icon: Ruler,
   },
   {
     id: "misc-steel",
     title: "What is Miscellaneous Steel?",
-    short:
-      "Special components that complete the structure.",
+    short: "Special components that complete the structure.",
     text:
       "Miscellaneous steel includes stairs, railings, ladders, embeds, platforms, and other non-primary steel elements. These require precise detailing to ensure proper fit, safety, and coordination with architectural and structural systems.",
-    images: [
-      "/images/resource-misc-1.jpg",
-    ],
+    image: "/images/resource-misc-1.jpg",
     icon: Wrench,
   },
   {
     id: "field-verification",
     title: "Why Field Verification Matters",
-    short:
-      "Ensuring drawings match real-world conditions.",
+    short: "Ensuring drawings match real-world conditions.",
     text:
       "Field verification confirms dimensions and conditions on-site before fabrication. This helps prevent costly errors, reduces rework, and ensures that detailing aligns with actual construction conditions.",
-    images: [
-      "/images/resource-field-1.jpg",
-    ],
+    image: "/images/resource-field-1.jpg",
     icon: BookOpen,
   },
   {
     id: "takeoffs",
     title: "Understanding Material Take-Offs",
-    short:
-      "Accurate quantities for budgeting and planning.",
+    short: "Accurate quantities for budgeting and planning.",
     text:
       "Material take-offs quantify steel components required for a project. Accurate take-offs are essential for estimating costs, procurement planning, and scheduling, helping teams reduce uncertainty and control budgets.",
-    images: [
-      "/images/resource-takeoff-1.jpg",
-    ],
+    image: "/images/resource-takeoff-1.jpg",
     icon: Layers,
   },
   {
     id: "connection-design-basics",
     title: "Connection Design Basics",
-    short:
-      "How steel members are safely connected.",
+    short: "How steel members are safely connected.",
     text:
       "Connection design ensures structural elements transfer loads safely and efficiently. Coordination between engineers and detailers is critical to ensure connections are both structurally sound and practical for fabrication and installation.",
-    images: [
-      "/images/resource-connection-1.jpg",
-    ],
+    image: "/images/resource-connection-1.jpg",
     icon: Sparkles,
   },
 ];
 
 function ResourceCard({ item, isOpen, onToggle }) {
   const Icon = item.icon;
-  const [imgIndex, setImgIndex] = useState(0);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const timer = setInterval(() => {
-      setImgIndex((prev) => (prev + 1) % item.images.length);
-    }, 2200);
-
-    return () => clearInterval(timer);
-  }, [isOpen, item.images.length]);
 
   return (
     <motion.div
@@ -108,11 +79,11 @@ function ResourceCard({ item, isOpen, onToggle }) {
       transition={{ duration: 0.6 }}
     >
       <div className="resource-image-wrap">
-          <img
-            src={item.image}
-            className="resource-image"
-            alt={item.title}
-          />
+        <img
+          src={item.image}
+          className="resource-image"
+          alt={item.title}
+        />
         <div className="resource-overlay" />
       </div>
 
@@ -128,7 +99,7 @@ function ResourceCard({ item, isOpen, onToggle }) {
           <p>{item.text}</p>
         </div>
 
-        <button className="resource-btn" onClick={onToggle}>
+        <button type="button" className="resource-btn" onClick={onToggle}>
           {isOpen ? "Show Less" : "Learn More"}
           <ChevronDown className={isOpen ? "rotate" : ""} size={16} />
         </button>
@@ -145,7 +116,7 @@ export default function Resources() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/resource-hero.png')" }}
+          style={{ backgroundImage: "url('/images/resource-hero.jpg')" }}
         />
         <div className="page-bg-overlay" />
 

@@ -112,11 +112,13 @@ ${form.details}`
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Select Service</option>
+                  <option value="" disabled>
+                    Select Service
+                  </option>
                   <option value="Project Management">Project Management</option>
                   <option value="Structural Steel Detailing">Structural Steel Detailing</option>
                   <option value="Misc. Steel Detailing">Misc. Steel Detailing</option>
-                  <option value="Connection Design Support">Connection Design Support</option>
+                  <option value="Connection Design">Connection Design</option>
                   <option value="Estimation & Material Take-Offs">Estimation & Material Take-Offs</option>
                   <option value="Field Verification in DMV Area">Field Verification in DMV Area</option>
                 </select>

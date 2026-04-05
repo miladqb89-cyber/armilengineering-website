@@ -1431,3 +1431,190 @@ a{color:inherit}
 .nav-link.active {
   color: #a78bfa;
 }
+
+/* ===========================
+   SERVICES PAGE FINAL FIXES
+   =========================== */
+
+.services-hero {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.services-overlay {
+  background:
+    radial-gradient(circle at top right, rgba(139,92,246,0.20), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(59,130,246,0.10), transparent 28%),
+    linear-gradient(180deg, rgba(10,10,15,0.78) 0%, rgba(10,10,15,0.66) 42%, rgba(10,10,15,0.9) 100%);
+}
+
+.services-hero-card {
+  position: relative;
+  z-index: 3;
+  max-width: 860px;
+  margin-top: 24px;
+}
+
+.overlap-section {
+  margin-top: -54px;
+  z-index: 5;
+}
+
+.services-accordion {
+  display: grid;
+  gap: 16px;
+}
+
+.service-item {
+  position: relative;
+  z-index: 8;
+  border-radius: 22px;
+  background: rgba(20, 24, 36, 0.82);
+  border: 1px solid rgba(255,255,255,0.10);
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.service-trigger {
+  width: 100%;
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: left;
+}
+
+.service-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.service-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.service-panel.show {
+  max-height: 420px;
+}
+
+.service-content {
+  padding: 0 24px 24px;
+}
+
+.service-content p {
+  margin: 0 0 18px;
+  line-height: 1.8;
+  color: rgba(248,251,255,0.88);
+}
+
+.service-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.value-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.value-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.services-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.process-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 22px;
+  border-radius: 18px;
+}
+
+.services-final-cta {
+  text-align: center;
+}
+
+.center-actions {
+  justify-content: center;
+}
+
+/* Keep header above hero/cards */
+.site-header {
+  z-index: 200;
+}
+
+/* Quote form select fix */
+.quote-form select {
+  color: #ffffff;
+  background: rgba(255,255,255,0.04);
+  appearance: auto;
+}
+
+.quote-form select option {
+  color: #111111;
+  background: #ffffff;
+}
+
+/* textarea and select visual consistency */
+.quote-form textarea,
+.quote-form select,
+.quote-form input {
+  min-height: 54px;
+}
+
+.quote-form textarea {
+  min-height: 180px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .services-process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-hero-card {
+    margin-top: 10px;
+  }
+
+  .overlap-section {
+    margin-top: -28px;
+  }
+
+  .service-trigger {
+    padding: 18px;
+    font-size: 15.5px;
+  }
+
+  .service-content {
+    padding: 0 18px 18px;
+  }
+}

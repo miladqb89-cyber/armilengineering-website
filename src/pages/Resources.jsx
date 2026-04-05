@@ -116,7 +116,7 @@ export default function Resources() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/resource-hero.jpg')" }}
+          style={{ backgroundImage: "url('/images/resource-hero.png')" }}
         />
         <div className="page-bg-overlay" />
 

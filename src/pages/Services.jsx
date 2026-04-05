@@ -10,7 +10,6 @@ import {
   ChevronDown,
   ArrowRight,
   CheckCircle2,
-  MessageCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -19,73 +18,66 @@ import FloatingChatBox from "../components/FloatingChatBox";
 const serviceCards = [
   {
     title: "Project Management",
-    text: "We provide structured project coordination and management support to help keep teams aligned, communication clear, and execution efficient from concept through completion.",
+    text: "We provide structured project management and coordination support to align design, detailing, fabrication, and field execution. Our focus on communication clarity, scheduling awareness, and real-world workflow integration helps projects move efficiently from concept through completion.",
     icon: Building2,
   },
   {
     title: "Structural Steel Detailing",
-    text: "Our team delivers high-precision, fabrication-ready detailing packages including shop drawings, erection drawings, and coordinated models developed for constructability and field performance.",
+    text: "We deliver fabrication-ready detailing packages including shop drawings, erection drawings, and fully coordinated 3D models. Each deliverable is developed with constructability, field conditions, and fabrication efficiency in mind.",
     icon: DraftingCompass,
   },
   {
     title: "Misc. Steel Detailing",
-    text: "We produce accurate detailing for stairs, railings, ladders, embeds, platforms, and other miscellaneous steel components to support smooth fabrication and installation.",
+    text: "We specialize in accurate detailing of stairs, railings, ladders, embeds, and platforms—ensuring proper fit, fabrication precision, and smooth installation for all miscellaneous steel components.",
     icon: Boxes,
   },
   {
     title: "Connection Design",
-    text: "We support connection design workflows through technical coordination and detailing assistance, helping teams resolve project requirements efficiently and clearly.",
+    text: "We support connection design workflows through technical coordination and detailing integration, helping resolve complex structural requirements while maintaining alignment between engineering intent and fabrication needs.",
     icon: FileText,
   },
   {
     title: "Estimation & Material Take-Offs",
-    text: "Our quantity take-off and estimation services provide dependable information for bidding, budgeting, planning, and material control with greater confidence.",
+    text: "Our estimation and quantity take-off services provide reliable data for bidding, budgeting, and material planning—helping clients reduce uncertainty, improve cost control, and accelerate decision-making.",
     icon: Calculator,
   },
   {
     title: "Field Verification in DMV Area",
-    text: "We provide field verification services across Virginia, Maryland, and Washington, DC to confirm dimensions, identify discrepancies, and improve alignment between drawings and site conditions.",
+    text: "We provide field verification services across Virginia, Maryland, and Washington, DC to confirm dimensions, identify discrepancies, and ensure that detailing aligns with real-world conditions.",
     icon: MapPinned,
   },
 ];
 
 const valuePoints = [
   "Fabrication-ready deliverables",
-  "Buildable, field-conscious detailing",
-  "Responsive project coordination",
-  "Support across VA, MD, and DC",
+  "Constructability-focused detailing",
+  "Real-world field coordination",
+  "Fast response and revision support",
+  "Coverage across VA • MD • DC",
 ];
 
-function ServiceAccordionItem({ item, isOpen, onClick }) {
+function ServiceItem({ item, isOpen, onClick }) {
   const Icon = item.icon;
 
   return (
-    <motion.div
-      className={`service-accordion-item ${isOpen ? "open" : ""}`}
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55 }}
-    >
-      <button className="service-accordion-trigger" onClick={onClick} type="button">
-        <div className="service-accordion-left">
-          <div className="service-icon-shell">
-            <div className="icon-badge">
-              <Icon size={18} />
-            </div>
+    <div className={`service-item ${isOpen ? "open" : ""}`}>
+      <button className="service-trigger" onClick={onClick}>
+        <div className="service-left">
+          <div className="icon-badge">
+            <Icon size={18} />
           </div>
           <span>{item.title}</span>
         </div>
         <ChevronDown size={18} className="service-chevron" />
       </button>
 
-      <div className={`service-accordion-panel ${isOpen ? "expanded" : ""}`}>
-        <div className="service-accordion-content">
+      <div className={`service-panel ${isOpen ? "show" : ""}`}>
+        <div className="service-content">
           <p>{item.text}</p>
 
-          <div className="service-accordion-actions">
+          <div className="service-actions">
             <NavLink to="/quote" className="btn btn-primary">
-              Request Quote
+              Request Quote <ArrowRight size={16} />
             </NavLink>
             <NavLink to="/contact" className="btn btn-secondary">
               Contact Us
@@ -93,7 +85,7 @@ function ServiceAccordionItem({ item, isOpen, onClick }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -102,34 +94,30 @@ export default function Services() {
 
   return (
     <>
-      <section className="services-hero premium-services-hero">
+      {/* HERO */}
+      <section className="services-hero">
         <div
           className="page-bg"
           style={{ backgroundImage: "url('/images/theme-construction-skyline.jpg')" }}
         />
-        <div className="page-bg-overlay premium-overlay" />
+        <div className="page-bg-overlay" />
 
         <motion.div
-          className="container standard-hero-content glass-hero premium-hero-card"
-          initial={{ opacity: 0, y: 34 }}
+          className="container hero-content"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
         >
           <div className="pill">
-            <Sparkles size={14} />
-            Premium Service Solutions
+            <Sparkles size={14} /> Services
           </div>
 
-          <h1>Specialized steel detailing and project support built for real-world execution.</h1>
+          <h1>Engineering precision applied to real-world construction.</h1>
 
           <p className="lead">
-            ArMil Engineering provides practical, buildable support in structural steel
-            detailing, misc. steel detailing, estimation, coordination, and field verification.
-          </p>
-
-          <p>
-            We focus on clarity, constructability, responsiveness, and precision—helping clients
-            move projects forward with confidence from concept through delivery.
+            ArMil Engineering delivers steel detailing, coordination,
+            estimation, and field support services designed for constructability,
+            accuracy, and performance.
           </p>
 
           <div className="hero-actions">
@@ -141,123 +129,88 @@ export default function Services() {
             </NavLink>
           </div>
 
-          <p className="quote-inline-text">
-            Need estimation or take-off support? Request a quote and get a fast response.
+          <p className="quote-line">
+            Need estimation or take-off support? Request a quote today.
           </p>
         </motion.div>
       </section>
 
-      <section className="page-section overlap-section premium-services-main">
-        <div className="container page-stack">
-          <motion.div
-            className="scroll-card premium-intro-card"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="mini-pill">What We Deliver</div>
-            <div className="services-intro-grid">
-              <div>
-                <h3>Services designed to support fabrication, coordination, and project delivery</h3>
-                <p>
-                  Our work is built around technical excellence, field awareness, and reliable
-                  coordination. We do not just prepare drawings—we help teams build with better
-                  clarity and fewer surprises.
-                </p>
+      {/* VALUE */}
+      <section className="section">
+        <div className="container">
+          <div className="value-grid">
+            {valuePoints.map((point) => (
+              <div key={point} className="value-item">
+                <CheckCircle2 size={18} />
+                <span>{point}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="services-value-list">
-                {valuePoints.map((point) => (
-                  <div key={point} className="value-item">
-                    <CheckCircle2 size={18} />
-                    <span>{point}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+      {/* SERVICES */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Core Services</h2>
 
-          <motion.div
-            className="scroll-card premium-accordion-card"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-          >
-            <div className="mini-pill">Core Services</div>
-            <h3 className="services-section-title">Explore our service areas</h3>
+          <div className="services-accordion">
+            {serviceCards.map((item, index) => (
+              <ServiceItem
+                key={item.title}
+                item={item}
+                isOpen={openIndex === index}
+                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="services-accordion">
-              {serviceCards.map((item, index) => (
-                <ServiceAccordionItem
-                  key={item.title}
-                  item={item}
-                  isOpen={openIndex === index}
-                  onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                />
-              ))}
-            </div>
-          </motion.div>
+      {/* PROCESS */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Our Process</h2>
 
-          <motion.div
-            className="scroll-card process-card"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.08 }}
-          >
-            <div className="mini-pill">Our Process</div>
-            <h3>How we support your project</h3>
-
-            <div className="process-grid">
-              <div className="process-step">
-                <div className="process-number">01</div>
-                <h4>Review</h4>
-                <p>We evaluate scope, drawings, specifications, and project requirements.</p>
-              </div>
-
-              <div className="process-step">
-                <div className="process-number">02</div>
-                <h4>Coordinate</h4>
-                <p>We align detailing, constructability, and communication across the workflow.</p>
-              </div>
-
-              <div className="process-step">
-                <div className="process-number">03</div>
-                <h4>Deliver</h4>
-                <p>We issue accurate, buildable deliverables designed for fabrication and field use.</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="scroll-card services-bottom-cta premium-final-cta"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            <div className="cta-icon-top">
-              <MessageCircle size={20} />
+          <div className="process-grid">
+            <div className="process-box">
+              <div className="num">01</div>
+              <h4>Review</h4>
+              <p>We analyze project scope, drawings, and requirements.</p>
             </div>
 
-            <h3>Let’s support your next project</h3>
-            <p>
-              Whether you need structural steel detailing, misc. steel support,
-              connection coordination, take-offs, or field verification, ArMil is
-              ready to help you move forward with precision and confidence.
-            </p>
-
-            <div className="hero-actions center-actions">
-              <NavLink to="/quote" className="btn btn-primary">
-                Request a Quote <ArrowRight size={16} />
-              </NavLink>
-              <NavLink to="/contact" className="btn btn-secondary">
-                Speak With Us
-              </NavLink>
+            <div className="process-box">
+              <div className="num">02</div>
+              <h4>Coordinate</h4>
+              <p>We align detailing, fabrication, and field conditions.</p>
             </div>
-          </motion.div>
+
+            <div className="process-box">
+              <div className="num">03</div>
+              <h4>Deliver</h4>
+              <p>We provide accurate, buildable, and ready-to-use outputs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section center">
+        <div className="container">
+          <h2>Let’s support your next project</h2>
+          <p>
+            Whether you need detailing, estimation, or field verification,
+            we help you move forward with confidence and precision.
+          </p>
+
+          <div className="hero-actions center">
+            <NavLink to="/quote" className="btn btn-primary">
+              Request a Quote
+            </NavLink>
+            <NavLink to="/contact" className="btn btn-secondary">
+              Contact Us
+            </NavLink>
+          </div>
         </div>
       </section>
 

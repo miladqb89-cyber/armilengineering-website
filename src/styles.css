@@ -837,3 +837,190 @@ a{color:inherit}
   .lightbox-nav.right{right:12px}
   .lightbox-close{top:12px;right:12px}
 }
+
+.cta-strip {
+  padding: 28px;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.cta-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.quote-inline-text {
+  margin-top: 16px;
+  opacity: 0.85;
+}
+
+.services-accordion {
+  display: grid;
+  gap: 14px;
+}
+
+.service-accordion-item {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+
+.service-accordion-trigger {
+  width: 100%;
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+
+.service-accordion-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+}
+
+.service-chevron {
+  transition: transform 0.25s ease;
+}
+
+.service-accordion-item.open .service-chevron {
+  transform: rotate(180deg);
+}
+
+.service-accordion-content {
+  padding: 0 20px 20px;
+}
+
+.service-accordion-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.services-bottom-cta {
+  text-align: center;
+}
+
+.floating-chat {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+}
+
+.chat-fab {
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5f2a91, #7c3aed);
+  color: white;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-panel {
+  width: 340px;
+  margin-bottom: 14px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #12131a;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.34);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.04);
+}
+
+.chat-subtitle {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 3px;
+}
+
+.chat-icon-btn {
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.chat-form {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.chat-form input,
+.chat-form textarea,
+.quote-form input,
+.quote-form textarea,
+.quote-form select {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: white;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.quote-form-card {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.quote-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.full {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .cta-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-panel {
+    width: min(340px, calc(100vw - 32px));
+  }
+
+  .floating-chat {
+    right: 16px;
+    bottom: 16px;
+  }
+}

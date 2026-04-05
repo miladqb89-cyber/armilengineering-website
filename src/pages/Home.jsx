@@ -1,7 +1,18 @@
 import { motion } from "framer-motion";
-import { Sparkles, ShieldCheck, Wrench, LayoutTemplate, BadgeCheck } from "lucide-react";
+import {
+  Sparkles,
+  ShieldCheck,
+  Wrench,
+  LayoutTemplate,
+  BadgeCheck,
+  MessageCircle,
+  Calculator,
+  ArrowRight,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import HomeHeroSlider from "../components/HomeHeroSlider";
+import FloatingChatBox from "../components/FloatingChatBox";
 
 const whyArmil = [
   {
@@ -43,7 +54,7 @@ function BeforeAfterSlider() {
       <div className="before-after-stage">
         <img
           src="/images/project-kite-stair.jpg"
-          alt="After"
+          alt="Project presentation"
           className="before-after-image"
         />
 
@@ -53,12 +64,15 @@ function BeforeAfterSlider() {
         >
           <img
             src="/images/theme-steel-connection.jpg"
-            alt="Before"
+            alt="Model concept"
             className="before-after-image"
           />
         </div>
 
-        <div className="before-after-divider" style={{ left: `${position}%` }}>
+        <div
+          className="before-after-divider"
+          style={{ left: `${position}%` }}
+        >
           <div className="before-after-handle" />
         </div>
 
@@ -81,69 +95,47 @@ function BeforeAfterSlider() {
 export default function Home() {
   return (
     <>
-      <section className="page-hero">
-        <div
-          className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-steel-connection.jpg')" }}
-        />
-        <div className="page-bg-overlay" />
-
-        <motion.div
-          className="container page-hero-content glass-hero"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-        >
-          <div className="pill">
-            <Sparkles size={14} />
-            Engineering Precision. Delivered with Confidence.
-          </div>
-
-          <h1>Advanced steel detailing, modeling, and engineering solutions.</h1>
-
-          <p className="lead">
-            ArMil Engineering &amp; Detailing is a specialized provider of structural steel
-            detailing and engineering support services. We combine advanced technology,
-            industry expertise, and a deep understanding of construction workflows to
-            deliver accurate, buildable solutions.
-          </p>
-
-          <p>
-            Our approach focuses on precision, coordination, and performance—ensuring
-            every project is executed to the highest standards from concept through completion.
-          </p>
-
-          <div className="hero-actions">
-            <NavLink to="/services" className="btn btn-primary">
-              Explore Services
-            </NavLink>
-            <NavLink to="/projects" className="btn btn-secondary">
-              View Projects
-            </NavLink>
-          </div>
-        </motion.div>
-      </section>
+      <HomeHeroSlider />
 
       <section className="page-section overlap-section">
         <div className="container page-stack">
-          <div className="scroll-card">
+          <motion.div
+            className="scroll-card"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7 }}
+          >
             <div className="metrics-grid">
               <Metric title="Coverage" value="VA • MD • DC" />
               <Metric title="Support" value="Fast & Clear" />
               <Metric title="Focus" value="Buildable Solutions" />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="scroll-card">
+          <motion.div
+            className="scroll-card"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.05 }}
+          >
             <div className="mini-pill">Technical Excellence</div>
             <h3>Advanced detailing support for complex construction projects</h3>
             <p>
-              Precision, coordination, and performance define how we support fabrication,
-              engineering workflows, and project execution.
+              ArMil Engineering &amp; Detailing supports fabrication,
+              coordination, and project execution with a practical,
+              construction-focused mindset.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="scroll-card">
+          <motion.div
+            className="scroll-card"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             <h3>Why ArMil</h3>
             <div className="why-grid">
               {whyArmil.map((item) => {
@@ -161,20 +153,63 @@ export default function Home() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="scroll-card">
+          <motion.div
+            className="scroll-card"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+          >
             <div className="mini-pill">Before / After</div>
             <h3>Engineering visualization with presentation impact</h3>
             <p>
-              Compare conceptual/model-driven visuals with project-ready presentation output.
-              This kind of visual storytelling helps clients understand coordination quality
-              and detailing clarity.
+              Compare conceptual/model-driven visuals with project-ready
+              presentation output to show coordination quality and detailing clarity.
             </p>
             <BeforeAfterSlider />
-          </div>
+          </motion.div>
+
+          <motion.div
+            className="scroll-card cta-strip"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <div className="cta-grid">
+              <div className="cta-box">
+                <div className="icon-badge">
+                  <Calculator size={20} />
+                </div>
+                <h3>Need estimation or take-off support?</h3>
+                <p>
+                  Request a quote for detailing, take-offs, modeling, or field support.
+                </p>
+                <NavLink to="/quote" className="btn btn-primary">
+                  Request a Quote <ArrowRight size={16} />
+                </NavLink>
+              </div>
+
+              <div className="cta-box">
+                <div className="icon-badge">
+                  <MessageCircle size={20} />
+                </div>
+                <h3>Need quick help?</h3>
+                <p>
+                  Use the chat box on the lower right to send a fast project inquiry.
+                </p>
+                <NavLink to="/contact" className="btn btn-secondary">
+                  Contact Us
+                </NavLink>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      <FloatingChatBox />
     </>
   );
 }

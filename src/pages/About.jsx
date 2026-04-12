@@ -7,7 +7,7 @@ export default function About() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-abstract-structure.jpg')" }}
+          style={{ backgroundImage: "url('./images/theme-abstract-structure.jpg')" }}
         />
         <div className="page-bg-overlay" />
 

@@ -17,7 +17,7 @@ const resources = [
     short: "The foundation of fabrication-ready drawings and models.",
     text:
       "Structural steel detailing is the process of producing detailed drawings and 3D models used for fabrication and erection. These include shop drawings, erection plans, and connection details that guide fabrication shops and field crews throughout construction.",
-    image: "/images/resource-detailing-1.jpg",
+    image: "./images/resource-detailing-1.jpg",
     icon: Layers,
   },
   {
@@ -26,7 +26,7 @@ const resources = [
     short: "Understanding how fabrication and field drawings differ.",
     text:
       "Shop drawings are used in fabrication shops to produce steel components with exact dimensions, welds, and materials. Erection drawings are used on-site to guide installation, showing placement, sequencing, and connections.",
-    image: "/images/resource-shop-1.jpg",
+    image: "./images/resource-shop-1.jpg",
     icon: Ruler,
   },
   {
@@ -35,7 +35,7 @@ const resources = [
     short: "Special components that complete the structure.",
     text:
       "Miscellaneous steel includes stairs, railings, ladders, embeds, platforms, and other non-primary steel elements. These require precise detailing to ensure proper fit, safety, and coordination with architectural and structural systems.",
-    image: "/images/resource-misc-1.jpg",
+    image: "./images/resource-misc-1.jpg",
     icon: Wrench,
   },
   {
@@ -44,7 +44,7 @@ const resources = [
     short: "Ensuring drawings match real-world conditions.",
     text:
       "Field verification confirms dimensions and conditions on-site before fabrication. This helps prevent costly errors, reduces rework, and ensures that detailing aligns with actual construction conditions.",
-    image: "/images/resource-field-1.jpg",
+    image: "./images/resource-field-1.jpg",
     icon: BookOpen,
   },
   {
@@ -53,7 +53,7 @@ const resources = [
     short: "Accurate quantities for budgeting and planning.",
     text:
       "Material take-offs quantify steel components required for a project. Accurate take-offs are essential for estimating costs, procurement planning, and scheduling, helping teams reduce uncertainty and control budgets.",
-    image: "/images/resource-takeoff-1.jpg",
+    image: "./images/resource-takeoff-1.jpg",
     icon: Layers,
   },
   {
@@ -62,7 +62,7 @@ const resources = [
     short: "How steel members are safely connected.",
     text:
       "Connection design ensures structural elements transfer loads safely and efficiently. Coordination between engineers and detailers is critical to ensure connections are both structurally sound and practical for fabrication and installation.",
-    image: "/images/resource-connection-1.jpg",
+    image: "./images/resource-connection-1.jpg",
     icon: Sparkles,
   },
 ];
@@ -116,7 +116,7 @@ export default function Resources() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/resource-hero.png')" }}
+          style={{ backgroundImage: "url('./images/resource-hero.png')" }}
         />
         <div className="page-bg-overlay" />
 

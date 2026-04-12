@@ -53,7 +53,7 @@ function BeforeAfterSlider() {
     <div className="before-after-wrap">
       <div className="before-after-stage">
         <img
-          src="/images/project-kite-stair.jpg"
+          src="./images/project-kite-stair.jpg"
           alt="Project presentation"
           className="before-after-image"
         />

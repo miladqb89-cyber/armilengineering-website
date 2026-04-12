@@ -37,7 +37,7 @@ export default function Contact() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-washington-dc.jpg')" }}
+          style={{ backgroundImage: "url('./images/theme-washington-dc.jpg')" }}
         />
         <div className="page-bg-overlay" />
 

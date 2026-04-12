@@ -9,7 +9,7 @@ const projects = [
   {
     title: "Durga Temple, VA",
     image: "project-durga-temple.jpg",
-    images: ["/images/project-durga-temple.jpg"],
+    images: ["./images/project-durga-temple.jpg"],
     address: "8400 Durga Pl, Fairfax Station, VA 22039",
     type: "Institutional",
     scope: "Complex structural steel detailing and coordination support",
@@ -21,10 +21,10 @@ const projects = [
   {
     title: "Kite Stair, MD",
     image: "project-kite-stair.jpg",
-    images: ["/images/project-kite-stair.jpg"],
+    images: ["./images/project-kite-stair.jpg"],
     imageClass: "contain-image",
     has3D: true,
-    model: "/models/steel-model.glb",
+    model: "./models/steel-model.glb",
     address: "9021 Bennett Creek Blvd, Urbana, MD 21704",
     type: "Custom Stair System",
     scope: "Custom stair detailing and connection coordination",
@@ -36,7 +36,7 @@ const projects = [
   {
     title: "Private Residence, VA",
     image: "project-private-house.jpg",
-    images: ["/images/project-private-house.jpg"],
+    images: ["./images/project-private-house.jpg"],
     address: "1900 Virginia Ave, Mclean, VA 22101",
     type: "Residential",
     scope: "Residential structural steel detailing and support",
@@ -48,7 +48,7 @@ const projects = [
   {
     title: "YMCA Fence, VA",
     image: "project-ymca-fence.jpg",
-    images: ["/images/project-ymca-fence.jpg"],
+    images: ["./images/project-ymca-fence.jpg"],
     address: "2640 Shirlington Road, Arlington, VA 22206",
     type: "Community Facility",
     scope: "Structural and fencing detailing support",
@@ -104,7 +104,7 @@ export default function Projects() {
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-steel-bridge.jpg')" }}
+          style={{ backgroundImage: "url('./images/theme-steel-bridge.jpg')" }}
         />
         <div className="page-bg-overlay" />
 

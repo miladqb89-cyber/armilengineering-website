@@ -44,7 +44,7 @@ ${form.details}`
       <section className="standard-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-steel-connection.jpg')" }}
+          style={{ backgroundImage: "url('./images/theme-steel-connection.jpg')" }}
         />
         <div className="page-bg-overlay" />
 

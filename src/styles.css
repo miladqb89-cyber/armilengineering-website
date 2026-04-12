@@ -3977,3 +3977,48 @@ a{color:inherit}
 .mobile-submenu button:hover {
   background: rgba(255, 255, 255, 0.05);
 }
+
+.quote-form-head {
+  margin-bottom: 20px;
+}
+
+.quote-form-head h2 {
+  margin: 0 0 10px;
+}
+
+.quote-form-head p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.quote-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.quote-note {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.form-status {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.form-status-success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.form-status-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}

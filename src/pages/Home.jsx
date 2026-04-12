@@ -63,7 +63,7 @@ function BeforeAfterSlider() {
           style={{ width: `${position}%` }}
         >
           <img
-            src="/images/theme-steel-connection.jpg"
+            src="./images/theme-steel-connection.jpg"
             alt="Model concept"
             className="before-after-image"
           />

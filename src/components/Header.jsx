@@ -18,7 +18,7 @@ export default function Header() {
       <div className="container header-inner">
         <NavLink to="/" className="brand" onClick={closeMenu}>
           <div className="brand-logo">
-            <img src="/images/hero-logo.jpg" alt="ArMil logo" />
+            <img src="./images/hero-logo.jpg" alt="ArMil logo" />
           </div>
           <div>
             <div className="brand-name">ArMiL</div>

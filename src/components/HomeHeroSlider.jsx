@@ -4,7 +4,7 @@ import "./HomeHeroSlider.css";
 const slides = [
   {
     id: 1,
-    image: "/images/slide-1-company.jpg",
+    image: "./images/slide-1-company.jpg",
     headline: "Engineering Precision. Built for Results.",
     subtext:
       "We deliver high-quality structural steel detailing, engineering support, and construction solutions with accuracy, speed, and reliability.",
@@ -13,7 +13,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/images/slide-2-steel.png",
+    image: "./images/slide-2-steel.png",
     headline: "Structural Steel Detailing Experts",
     subtext:
       "Fabrication-ready shop drawings and 3D models using Tekla Structures, helping reduce errors and keep your project moving smoothly.",
@@ -22,7 +22,7 @@ const slides = [
   },
   {
     id: 3,
-    image: "/images/slide-3-takeoff.gif",
+    image: "./images/slide-3-takeoff.gif",
     headline: "Accurate Estimation & Material Take-Offs",
     subtext:
       "We provide precise quantity take-offs and estimating support to help contractors bid smarter, plan better, and save time.",
@@ -31,7 +31,7 @@ const slides = [
   },
   {
     id: 4,
-    image: "/images/slide-4-project.jpg",
+    image: "./images/slide-4-project.jpg",
     headline: "From Design to Field Execution",
     subtext:
       "From project management to field verification in the DMV area, we support real-world coordination and practical execution.",
@@ -40,7 +40,7 @@ const slides = [
   },
   {
     id: 5,
-    image: "/images/slide-5-trust.jpg",
+    image: "./images/slide-5-trust.jpg",
     headline: "Trusted by Contractors & Fabricators",
     subtext:
       "We build long-term partnerships through responsiveness, dependable service, and consistent high-quality deliverables.",

@@ -5,7 +5,7 @@ export default function ProjectCard({ project, onOpenModel, onOpenLightbox }) {
     <div className="scroll-card project-card premium-project-card">
       <div className="project-image-wrap project-image-clickable">
         <img
-          src={`/images/${project.image}`}
+          src={`./images/${project.image}`}
           alt={project.title}
           className={`project-image ${project.imageClass || ""}`}
         />

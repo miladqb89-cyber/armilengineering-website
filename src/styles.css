@@ -3958,3 +3958,22 @@ a{color:inherit}
     height: 200px;
   }
 }
+
+/* Fix dropdown buttons to look like links */
+.nav-dropdown-link,
+.mobile-submenu button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 10px 14px;
+}
+
+/* Optional hover effect (recommended) */
+.nav-dropdown-link:hover,
+.mobile-submenu button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}

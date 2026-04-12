@@ -22,9 +22,9 @@ const services = [
     detailText:
       "We provide organized project management support to improve communication, coordination, and progress tracking throughout the life of the project. Our approach helps teams stay aligned from planning through execution while reducing delays and improving workflow clarity.",
     images: [
-      "/images/service-project-management-1.jpg",
-      "/images/service-project-management-2.jpg",
-      "/images/service-project-management-3.jpg",
+      "./images/service-project-management-1.jpg",
+      "./images/service-project-management-2.jpg",
+      "./images/service-project-management-3.jpg",
     ],
     icon: Building2,
   },
@@ -36,9 +36,9 @@ const services = [
     detailText:
       "Our structural steel detailing services are developed with constructability, field conditions, and fabrication efficiency in mind. We produce clear, accurate, and buildable deliverables that support smoother production, fewer errors, and better coordination between project stakeholders.",
     images: [
-      "/images/service-structural-steel-1.jpg",
-      "/images/service-structural-steel-2.jpg",
-      "/images/service-structural-steel-3.jpg",
+      "./images/service-structural-steel-1.jpg",
+      "./images/service-structural-steel-2.jpg",
+      "./images/service-structural-steel-3.jpg",
     ],
     icon: DraftingCompass,
   },
@@ -50,9 +50,9 @@ const services = [
     detailText:
       "We specialize in miscellaneous steel detailing for components that require both technical precision and practical fit. Our work supports accurate fabrication, proper installation, and a clean final result across a wide range of project types.",
     images: [
-      "/images/service-misc-steel-1.jpg",
-      "/images/service-misc-steel-2.jpg",
-      "/images/service-misc-steel-3.jpg",
+      "./images/service-misc-steel-1.jpg",
+      "./images/service-misc-steel-2.jpg",
+      "./images/service-misc-steel-3.jpg",
     ],
     icon: Boxes,
   },
@@ -64,9 +64,9 @@ const services = [
     detailText:
       "We assist with connection design coordination to help align engineering requirements with fabrication needs. This service supports better clarity, reduced conflicts, and smoother communication across the detailing and engineering process.",
     images: [
-      "/images/service-connection-design-1.jpg",
-      "/images/service-connection-design-2.jpg",
-      "/images/service-connection-design-3.jpg",
+      "./images/service-connection-design-1.jpg",
+      "./images/service-connection-design-2.jpg",
+      "./images/service-connection-design-3.jpg",
     ],
     icon: FileText,
   },
@@ -78,9 +78,9 @@ const services = [
     detailText:
       "Our take-off and estimation services provide dependable quantity information for budgeting, bidding, procurement, and material planning. This helps clients improve cost visibility, reduce uncertainty, and make informed project decisions faster.",
     images: [
-      "/images/service-estimation-1.jpg",
-      "/images/service-estimation-2.jpg",
-      "/images/service-estimation-3.jpg",
+      "./images/service-estimation-1.jpg",
+      "./images/service-estimation-2.jpg",
+      "./images/service-estimation-3.jpg",
     ],
     icon: Calculator,
   },
@@ -92,9 +92,9 @@ const services = [
     detailText:
       "We provide field verification to confirm dimensions, identify discrepancies, and ensure that drawings align with actual site conditions. This service improves coordination quality and helps reduce costly revisions or installation issues later in the project.",
     images: [
-      "/images/service-field-verification-1.jpg",
-      "/images/service-field-verification-2.jpg",
-      "/images/service-field-verification-3.jpg",
+      "./images/service-field-verification-1.jpg",
+      "./images/service-field-verification-2.jpg",
+      "./images/service-field-verification-3.jpg",
     ],
     icon: MapPinned,
   },
@@ -194,7 +194,7 @@ export default function Services() {
       <section className="services-hero">
         <div
           className="page-bg"
-          style={{ backgroundImage: "url('/images/theme-construction-skyline.jpg')" }}
+          style={{ backgroundImage: "url('./images/theme-construction-skyline.jpg')" }}
         />
         <div className="page-bg-overlay services-overlay" />
 

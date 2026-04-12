@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Header() {
@@ -7,11 +7,46 @@ export default function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const closeMenu = () => {
     setOpen(false);
     setMobileServicesOpen(false);
     setMobileResourcesOpen(false);
   };
+
+  const goToSection = (path, sectionId) => {
+    closeMenu();
+
+    sessionStorage.setItem("pendingSectionScroll", sectionId);
+
+    if (location.pathname === path) {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    } else {
+      navigate(path);
+    }
+  };
+
+  useEffect(() => {
+    const pendingSection = sessionStorage.getItem("pendingSectionScroll");
+    if (!pendingSection) return;
+
+    const timer = setTimeout(() => {
+      const element = document.getElementById(pendingSection);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        sessionStorage.removeItem("pendingSectionScroll");
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [location]);
 
   return (
     <header className="site-header fixed-header">
@@ -27,79 +62,182 @@ export default function Header() {
         </NavLink>
 
         <nav className="desktop-nav">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             Home
           </NavLink>
 
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             About
           </NavLink>
 
           <div className="nav-dropdown">
-            <NavLink to="/services" className={({ isActive }) => (isActive ? "nav-link active nav-dropdown-trigger" : "nav-link nav-dropdown-trigger")}>
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active nav-dropdown-trigger"
+                  : "nav-link nav-dropdown-trigger"
+              }
+            >
               <span>Services</span>
               <ChevronDown size={15} />
             </NavLink>
 
             <div className="nav-dropdown-menu">
-              <a href="/services#project-management" className="nav-dropdown-link">
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/services", "project-management")}
+              >
                 Project Management
-              </a>
-              <a href="/services#structural-steel-detailing" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToSection("/services", "structural-steel-detailing")
+                }
+              >
                 Structural Steel Detailing
-              </a>
-              <a href="/services#misc-steel-detailing" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/services", "misc-steel-detailing")}
+              >
                 Misc. Steel Detailing
-              </a>
-              <a href="/services#connection-design" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/services", "connection-design")}
+              >
                 Connection Design
-              </a>
-              <a href="/services#estimation-takeoffs" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/services", "estimation-takeoffs")}
+              >
                 Estimation &amp; Material Take-Offs
-              </a>
-              <a href="/services#field-verification" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/services", "field-verification")}
+              >
                 Field Verification in DMV Area
-              </a>
+              </button>
             </div>
           </div>
 
-          <NavLink to="/projects" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             Projects
           </NavLink>
 
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             Contact
           </NavLink>
 
-          <NavLink to="/quote" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          <NavLink
+            to="/quote"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             Quote
           </NavLink>
 
           <div className="nav-dropdown">
-            <NavLink to="/resources" className={({ isActive }) => (isActive ? "nav-link active nav-dropdown-trigger" : "nav-link nav-dropdown-trigger")}>
+            <NavLink
+              to="/resources"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active nav-dropdown-trigger"
+                  : "nav-link nav-dropdown-trigger"
+              }
+            >
               <span>Resources</span>
               <ChevronDown size={15} />
             </NavLink>
 
             <div className="nav-dropdown-menu nav-dropdown-menu-right">
-              <a href="/resources#steel-detailing-basics" className="nav-dropdown-link">
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToSection("/resources", "steel-detailing-basics")
+                }
+              >
                 Steel Detailing Basics
-              </a>
-              <a href="/resources#shop-vs-erection" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/resources", "shop-vs-erection")}
+              >
                 Shop vs Erection Drawings
-              </a>
-              <a href="/resources#misc-steel" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/resources", "misc-steel")}
+              >
                 Miscellaneous Steel
-              </a>
-              <a href="/resources#field-verification" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/resources", "field-verification")}
+              >
                 Field Verification
-              </a>
-              <a href="/resources#takeoffs" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToSection("/resources", "takeoffs")}
+              >
                 Material Take-Offs
-              </a>
-              <a href="/resources#connection-design-basics" className="nav-dropdown-link">
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToSection("/resources", "connection-design-basics")
+                }
+              >
                 Connection Design Basics
-              </a>
+              </button>
             </div>
           </div>
         </nav>
@@ -109,7 +247,11 @@ export default function Header() {
             Request a Quote
           </NavLink>
 
-          <button className="mobile-btn" onClick={() => setOpen(!open)} type="button">
+          <button
+            className="mobile-btn"
+            onClick={() => setOpen(!open)}
+            type="button"
+          >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
@@ -118,8 +260,13 @@ export default function Header() {
       {open && (
         <div className="mobile-nav">
           <div className="container mobile-nav-inner">
-            <NavLink to="/" onClick={closeMenu}>Home</NavLink>
-            <NavLink to="/about" onClick={closeMenu}>About</NavLink>
+            <NavLink to="/" onClick={closeMenu}>
+              Home
+            </NavLink>
+
+            <NavLink to="/about" onClick={closeMenu}>
+              About
+            </NavLink>
 
             <button
               type="button"
@@ -127,23 +274,73 @@ export default function Header() {
               onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
             >
               <span>Services</span>
-              <ChevronDown size={16} className={mobileServicesOpen ? "rotate-icon" : ""} />
+              <ChevronDown
+                size={16}
+                className={mobileServicesOpen ? "rotate-icon" : ""}
+              />
             </button>
 
             {mobileServicesOpen && (
               <div className="mobile-submenu">
-                <a href="/services#project-management" onClick={closeMenu}>Project Management</a>
-                <a href="/services#structural-steel-detailing" onClick={closeMenu}>Structural Steel Detailing</a>
-                <a href="/services#misc-steel-detailing" onClick={closeMenu}>Misc. Steel Detailing</a>
-                <a href="/services#connection-design" onClick={closeMenu}>Connection Design</a>
-                <a href="/services#estimation-takeoffs" onClick={closeMenu}>Estimation &amp; Material Take-Offs</a>
-                <a href="/services#field-verification" onClick={closeMenu}>Field Verification in DMV Area</a>
+                <button
+                  type="button"
+                  onClick={() => goToSection("/services", "project-management")}
+                >
+                  Project Management
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToSection("/services", "structural-steel-detailing")
+                  }
+                >
+                  Structural Steel Detailing
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToSection("/services", "misc-steel-detailing")
+                  }
+                >
+                  Misc. Steel Detailing
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/services", "connection-design")}
+                >
+                  Connection Design
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/services", "estimation-takeoffs")}
+                >
+                  Estimation &amp; Material Take-Offs
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/services", "field-verification")}
+                >
+                  Field Verification in DMV Area
+                </button>
               </div>
             )}
 
-            <NavLink to="/projects" onClick={closeMenu}>Projects</NavLink>
-            <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink>
-            <NavLink to="/quote" onClick={closeMenu}>Quote</NavLink>
+            <NavLink to="/projects" onClick={closeMenu}>
+              Projects
+            </NavLink>
+
+            <NavLink to="/contact" onClick={closeMenu}>
+              Contact
+            </NavLink>
+
+            <NavLink to="/quote" onClick={closeMenu}>
+              Quote
+            </NavLink>
 
             <button
               type="button"
@@ -151,17 +348,61 @@ export default function Header() {
               onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
             >
               <span>Resources</span>
-              <ChevronDown size={16} className={mobileResourcesOpen ? "rotate-icon" : ""} />
+              <ChevronDown
+                size={16}
+                className={mobileResourcesOpen ? "rotate-icon" : ""}
+              />
             </button>
 
             {mobileResourcesOpen && (
               <div className="mobile-submenu">
-                <a href="/resources#steel-detailing-basics" onClick={closeMenu}>Steel Detailing Basics</a>
-                <a href="/resources#shop-vs-erection" onClick={closeMenu}>Shop vs Erection Drawings</a>
-                <a href="/resources#misc-steel" onClick={closeMenu}>Miscellaneous Steel</a>
-                <a href="/resources#field-verification" onClick={closeMenu}>Field Verification</a>
-                <a href="/resources#takeoffs" onClick={closeMenu}>Material Take-Offs</a>
-                <a href="/resources#connection-design-basics" onClick={closeMenu}>Connection Design Basics</a>
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToSection("/resources", "steel-detailing-basics")
+                  }
+                >
+                  Steel Detailing Basics
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/resources", "shop-vs-erection")}
+                >
+                  Shop vs Erection Drawings
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/resources", "misc-steel")}
+                >
+                  Miscellaneous Steel
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToSection("/resources", "field-verification")
+                  }
+                >
+                  Field Verification
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToSection("/resources", "takeoffs")}
+                >
+                  Material Take-Offs
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToSection("/resources", "connection-design-basics")
+                  }
+                >
+                  Connection Design Basics
+                </button>
               </div>
             )}
           </div>

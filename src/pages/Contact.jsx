@@ -65,7 +65,7 @@ export default function Contact() {
               </div>
               <h3>Contact ArMil Engineering &amp; Detailing</h3>
               <div className="contact-list">
-                <div><Mail size={16} /><span>armilengineering@yahoo.com</span></div>
+                <div><Mail size={16} /><span>Info@armilengineering.com</span></div>
                 <div><Phone size={16} /><span>571-317-5986</span></div>
                 <div><MapPin size={16} /><span>Virginia • Maryland • Washington, DC</span></div>
               </div>

@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="footer-heading">Contact</div>
           <div className="footer-text">
             <div>571-317-5986</div>
-            <div>armilengineering@yahoo.com</div>
+            <div>Info@armilengineering.com</div>
             <div>Virginia • Maryland • Washington, DC</div>
           </div>
         </div>

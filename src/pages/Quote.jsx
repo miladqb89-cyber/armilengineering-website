@@ -56,9 +56,12 @@ export default function Quote() {
       });
 
       setForm(initialForm);
-      formRef.current.reset();
+      if (formRef.current) {
+        formRef.current.reset();
+      }
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("EmailJS send error:", error);
+      
       setStatus({
         type: "error",
         message:

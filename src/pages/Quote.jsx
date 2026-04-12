@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Calculator, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+const initialForm = {
+  company: "",
+  contact: "",
+  email: "",
+  phone: "",
+  service: "",
+  projectName: "",
+  location: "",
+  deadline: "",
+  budget: "",
+  fileLink: "",
+  referralSource: "",
+  details: "",
+};
 
 export default function Quote() {
-  const [form, setForm] = useState({
-    company: "",
-    contact: "",
-    email: "",
-    phone: "",
-    service: "",
-    projectName: "",
-    location: "",
-    details: "",
+  const formRef = useRef(null);
+
+  const [form, setForm] = useState(initialForm);
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
   });
 
   function handleChange(e) {
@@ -19,24 +33,42 @@ export default function Quote() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setSending(true);
+    setStatus({ type: "", message: "" });
 
-    const subject = encodeURIComponent(`Quote Request - ${form.service || "Project Inquiry"}`);
-    const body = encodeURIComponent(
-      `Company: ${form.company}
-Contact: ${form.contact}
-Email: ${form.email}
-Phone: ${form.phone}
-Service Needed: ${form.service}
-Project Name: ${form.projectName}
-Location: ${form.location}
+    try {
+      await emailjs.sendForm(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        formRef.current,
+        {
+          publicKey: "YOUR_PUBLIC_KEY",
+        }
+      );
 
-Project Details:
-${form.details}`
-    );
+      setStatus({
+        type: "success",
+        message:
+          "Your quote request has been sent successfully. We will review your information and get back to you soon.",
+      });
 
-    window.location.href = `mailto:armilengineering@yahoo.com?subject=${subject}&body=${body}`;
+      setForm(initialForm);
+
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      setStatus({
+        type: "error",
+        message:
+          "We could not send your request right now. Please try again in a moment or contact us directly.",
+      });
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -57,10 +89,13 @@ ${form.details}`
           <div className="pill">
             <Calculator size={14} /> Request a Quote
           </div>
+
           <h1>Tell us about your project.</h1>
+
           <p className="lead">
-            Share your detailing, estimation, modeling, or field support needs
-            and we’ll help you move forward with clarity.
+            Share your detailing, estimation, modeling, or field support needs,
+            and our team will review your request and respond as soon as
+            possible.
           </p>
         </motion.div>
       </section>
@@ -74,7 +109,16 @@ ${form.details}`
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7 }}
           >
-            <form className="quote-form" onSubmit={handleSubmit}>
+            <div className="quote-form-head">
+              <h2>Request a Project Quote</h2>
+              <p>
+                Please complete the form below with as much detail as possible.
+                You may also include a shared link to drawings, PDFs, sketches,
+                or reference files.
+              </p>
+            </div>
+
+            <form ref={formRef} className="quote-form" onSubmit={handleSubmit}>
               <div className="form-grid">
                 <input
                   type="text"
@@ -83,22 +127,25 @@ ${form.details}`
                   value={form.company}
                   onChange={handleChange}
                 />
+
                 <input
                   type="text"
                   name="contact"
-                  placeholder="Contact Name"
+                  placeholder="Contact Name *"
                   value={form.contact}
                   onChange={handleChange}
                   required
                 />
+
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email Address"
+                  placeholder="Email Address *"
                   value={form.email}
                   onChange={handleChange}
                   required
                 />
+
                 <input
                   type="text"
                   name="phone"
@@ -106,22 +153,32 @@ ${form.details}`
                   value={form.phone}
                   onChange={handleChange}
                 />
+
                 <select
                   name="service"
                   value={form.service}
                   onChange={handleChange}
                   required
                 >
-                  <option value="" disabled>
-                    Select Service
-                  </option>
+                  <option value="">Select Service *</option>
                   <option value="Project Management">Project Management</option>
-                  <option value="Structural Steel Detailing">Structural Steel Detailing</option>
-                  <option value="Misc. Steel Detailing">Misc. Steel Detailing</option>
-                  <option value="Connection Design">Connection Design</option>
-                  <option value="Estimation & Material Take-Offs">Estimation & Material Take-Offs</option>
-                  <option value="Field Verification in DMV Area">Field Verification in DMV Area</option>
+                  <option value="Structural Steel Detailing">
+                    Structural Steel Detailing
+                  </option>
+                  <option value="Misc. Steel Detailing">
+                    Misc. Steel Detailing
+                  </option>
+                  <option value="Connection Design">
+                    Connection Design
+                  </option>
+                  <option value="Estimation & Material Take-Offs">
+                    Estimation & Material Take-Offs
+                  </option>
+                  <option value="Field Verification in DMV Area">
+                    Field Verification in DMV Area
+                  </option>
                 </select>
+
                 <input
                   type="text"
                   name="projectName"
@@ -129,6 +186,7 @@ ${form.details}`
                   value={form.projectName}
                   onChange={handleChange}
                 />
+
                 <input
                   type="text"
                   name="location"
@@ -136,21 +194,80 @@ ${form.details}`
                   value={form.location}
                   onChange={handleChange}
                 />
+
+                <input
+                  type="text"
+                  name="deadline"
+                  placeholder="Needed By / Deadline"
+                  value={form.deadline}
+                  onChange={handleChange}
+                />
+
+                <select
+                  name="budget"
+                  value={form.budget}
+                  onChange={handleChange}
+                >
+                  <option value="">Estimated Budget Range (optional)</option>
+                  <option value="Under $1,000">Under $1,000</option>
+                  <option value="$1,000 - $3,000">$1,000 - $3,000</option>
+                  <option value="$3,000 - $7,500">$3,000 - $7,500</option>
+                  <option value="$7,500 - $15,000">$7,500 - $15,000</option>
+                  <option value="$15,000+">$15,000+</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+
+                <input
+                  type="url"
+                  name="fileLink"
+                  placeholder="Google Drive / Dropbox / OneDrive file link"
+                  value={form.fileLink}
+                  onChange={handleChange}
+                />
+
+                <input
+                  type="text"
+                  name="referralSource"
+                  placeholder="How did you hear about us?"
+                  value={form.referralSource}
+                  onChange={handleChange}
+                />
               </div>
 
               <textarea
                 name="details"
-                rows="7"
-                placeholder="Project details, scope, schedule, drawings available, and anything else you'd like us to know..."
+                rows="8"
+                placeholder="Project details, scope, schedule, required deliverables, drawings available, and anything else you'd like us to know... *"
                 value={form.details}
                 onChange={handleChange}
                 required
               />
 
-              <button type="submit" className="btn btn-primary">
-                <Send size={16} />
-                Submit Quote Request
-              </button>
+              <div className="quote-form-footer">
+                <p className="quote-note">
+                  Fields marked with * are recommended for a faster and more
+                  accurate response.
+                </p>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={sending}
+                >
+                  <Send size={16} />
+                  {sending ? "Sending..." : "Submit Quote Request"}
+                </button>
+              </div>
+
+              {status.message && (
+                <p
+                  className={`form-status ${
+                    status.type === "success" ? "form-status-success" : "form-status-error"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

@@ -39,12 +39,13 @@ export default function Quote() {
     setStatus({ type: "", message: "" });
 
     try {
+      // ✅ SEND EMAIL TO YOU
       await emailjs.sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_hdtlqow",
+        "template_zw6eef4",
         formRef.current,
         {
-          publicKey: "YOUR_PUBLIC_KEY",
+          publicKey: "7S7sczXrj-G9zRnji",
         }
       );
 
@@ -55,16 +56,13 @@ export default function Quote() {
       });
 
       setForm(initialForm);
-
-      if (formRef.current) {
-        formRef.current.reset();
-      }
+      formRef.current.reset();
     } catch (error) {
-      console.error("EmailJS send error:", error);
+      console.error("EmailJS error:", error);
       setStatus({
         type: "error",
         message:
-          "We could not send your request right now. Please try again in a moment or contact us directly.",
+          "Something went wrong. Please try again or contact us directly.",
       });
     } finally {
       setSending(false);
@@ -84,7 +82,7 @@ export default function Quote() {
           className="container standard-hero-content glass-hero"
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
         >
           <div className="pill">
             <Calculator size={14} /> Request a Quote
@@ -93,9 +91,7 @@ export default function Quote() {
           <h1>Tell us about your project.</h1>
 
           <p className="lead">
-            Share your detailing, estimation, modeling, or field support needs,
-            and our team will review your request and respond as soon as
-            possible.
+            Share your detailing, estimation, modeling, or field support needs.
           </p>
         </motion.div>
       </section>
@@ -106,165 +102,65 @@ export default function Quote() {
             className="scroll-card quote-form-card"
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="quote-form-head">
-              <h2>Request a Project Quote</h2>
-              <p>
-                Please complete the form below with as much detail as possible.
-                You may also include a shared link to drawings, PDFs, sketches,
-                or reference files.
-              </p>
-            </div>
-
             <form ref={formRef} className="quote-form" onSubmit={handleSubmit}>
               <div className="form-grid">
-                <input
-                  type="text"
-                  name="company"
-                  placeholder="Company Name"
-                  value={form.company}
-                  onChange={handleChange}
-                />
 
-                <input
-                  type="text"
-                  name="contact"
-                  placeholder="Contact Name *"
-                  value={form.contact}
-                  onChange={handleChange}
-                  required
-                />
+                <input name="company" placeholder="Company Name" onChange={handleChange} />
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address *"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
+                <input name="contact" placeholder="Contact Name *" required onChange={handleChange} />
 
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={form.phone}
-                  onChange={handleChange}
-                />
+                <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} />
 
-                <select
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                  required
-                >
+                <input name="phone" placeholder="Phone Number" onChange={handleChange} />
+
+                <select name="service" required onChange={handleChange}>
                   <option value="">Select Service *</option>
-                  <option value="Project Management">Project Management</option>
-                  <option value="Structural Steel Detailing">
-                    Structural Steel Detailing
-                  </option>
-                  <option value="Misc. Steel Detailing">
-                    Misc. Steel Detailing
-                  </option>
-                  <option value="Connection Design">
-                    Connection Design
-                  </option>
-                  <option value="Estimation & Material Take-Offs">
-                    Estimation & Material Take-Offs
-                  </option>
-                  <option value="Field Verification in DMV Area">
-                    Field Verification in DMV Area
-                  </option>
+                  <option>Project Management</option>
+                  <option>Structural Steel Detailing</option>
+                  <option>Misc. Steel Detailing</option>
+                  <option>Connection Design</option>
+                  <option>Estimation & Material Take-Offs</option>
+                  <option>Field Verification in DMV Area</option>
                 </select>
 
-                <input
-                  type="text"
-                  name="projectName"
-                  placeholder="Project Name"
-                  value={form.projectName}
-                  onChange={handleChange}
-                />
+                <input name="projectName" placeholder="Project Name" onChange={handleChange} />
 
-                <input
-                  type="text"
-                  name="location"
-                  placeholder="Project Location"
-                  value={form.location}
-                  onChange={handleChange}
-                />
+                <input name="location" placeholder="Project Location" onChange={handleChange} />
 
-                <input
-                  type="text"
-                  name="deadline"
-                  placeholder="Needed By / Deadline"
-                  value={form.deadline}
-                  onChange={handleChange}
-                />
+                <input name="deadline" placeholder="Deadline" onChange={handleChange} />
 
-                <select
-                  name="budget"
-                  value={form.budget}
-                  onChange={handleChange}
-                >
-                  <option value="">Estimated Budget Range (optional)</option>
-                  <option value="Under $1,000">Under $1,000</option>
-                  <option value="$1,000 - $3,000">$1,000 - $3,000</option>
-                  <option value="$3,000 - $7,500">$3,000 - $7,500</option>
-                  <option value="$7,500 - $15,000">$7,500 - $15,000</option>
-                  <option value="$15,000+">$15,000+</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
+                <select name="budget" onChange={handleChange}>
+                  <option value="">Budget Range</option>
+                  <option>Under $1,000</option>
+                  <option>$1,000 - $3,000</option>
+                  <option>$3,000 - $7,500</option>
+                  <option>$7,500 - $15,000</option>
+                  <option>$15,000+</option>
                 </select>
 
-                <input
-                  type="url"
-                  name="fileLink"
-                  placeholder="Google Drive / Dropbox / OneDrive file link"
-                  value={form.fileLink}
-                  onChange={handleChange}
-                />
+                <input name="fileLink" placeholder="File Link (Drive/Dropbox)" onChange={handleChange} />
 
-                <input
-                  type="text"
-                  name="referralSource"
-                  placeholder="How did you hear about us?"
-                  value={form.referralSource}
-                  onChange={handleChange}
-                />
+                <input name="referralSource" placeholder="How did you hear about us?" onChange={handleChange} />
+
               </div>
 
               <textarea
                 name="details"
-                rows="8"
-                placeholder="Project details, scope, schedule, required deliverables, drawings available, and anything else you'd like us to know... *"
-                value={form.details}
-                onChange={handleChange}
+                rows="6"
+                placeholder="Project details..."
                 required
+                onChange={handleChange}
               />
 
-              <div className="quote-form-footer">
-                <p className="quote-note">
-                  Fields marked with * are recommended for a faster and more
-                  accurate response.
-                </p>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={sending}
-                >
-                  <Send size={16} />
-                  {sending ? "Sending..." : "Submit Quote Request"}
-                </button>
-              </div>
+              <button type="submit" className="btn btn-primary" disabled={sending}>
+                <Send size={16} />
+                {sending ? "Sending..." : "Submit Quote Request"}
+              </button>
 
               {status.message && (
-                <p
-                  className={`form-status ${
-                    status.type === "success" ? "form-status-success" : "form-status-error"
-                  }`}
-                >
+                <p className={`form-status ${status.type}`}>
                   {status.message}
                 </p>
               )}

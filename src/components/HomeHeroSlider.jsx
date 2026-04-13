@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./HomeHeroSlider.css";
 
 const slides = [
@@ -27,7 +28,7 @@ const slides = [
     subtext:
       "We provide precise quantity take-offs and estimating support to help contractors bid smarter, plan better, and save time.",
     buttonText: "Request a Quote",
-    buttonLink: "/contact?subject=Request%20a%20Quote",
+    buttonLink: "/quote",
   },
   {
     id: 4,
@@ -85,18 +86,29 @@ export default function HomeHeroSlider() {
             <span className="hero-tag">ArMil Engineering & Detailing</span>
             <h1>{slide.headline}</h1>
             <p>{slide.subtext}</p>
-            <a className="hero-btn" href={slide.buttonLink}>
+
+            <Link className="hero-btn" to={slide.buttonLink}>
               {slide.buttonText}
-            </a>
+            </Link>
           </div>
         </div>
       ))}
 
-      <button className="hero-arrow hero-arrow-left" onClick={goPrev} aria-label="Previous slide">
+      <button
+        className="hero-arrow hero-arrow-left"
+        onClick={goPrev}
+        aria-label="Previous slide"
+        type="button"
+      >
         ‹
       </button>
 
-      <button className="hero-arrow hero-arrow-right" onClick={goNext} aria-label="Next slide">
+      <button
+        className="hero-arrow hero-arrow-right"
+        onClick={goNext}
+        aria-label="Next slide"
+        type="button"
+      >
         ›
       </button>
 
@@ -107,6 +119,7 @@ export default function HomeHeroSlider() {
             className={`hero-dot ${index === current ? "active" : ""}`}
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
+            type="button"
           />
         ))}
       </div>

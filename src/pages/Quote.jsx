@@ -44,9 +44,7 @@ export default function Quote() {
         "service_hdtlqow",
         "template_zw6eef4",
         formRef.current,
-        {
-          publicKey: "7S7sczXrj-G9zRnji",
-        }
+        "LLLFa7fk49l4IGgR7"
       );
 
       setStatus({
@@ -61,7 +59,7 @@ export default function Quote() {
       }
     } catch (error) {
       console.error("EmailJS send error:", error);
-      
+
       setStatus({
         type: "error",
         message:

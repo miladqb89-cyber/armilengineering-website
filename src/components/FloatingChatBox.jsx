@@ -1,28 +1,58 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+const initialForm = {
+  name: "",
+  email: "",
+  message: "",
+};
 
 export default function FloatingChatBox() {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState({
+    type: "",
     message: "",
   });
+  const [form, setForm] = useState(initialForm);
+
+  const formRef = useRef(null);
 
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setSending(true);
+    setStatus({ type: "", message: "" });
 
-    const subject = encodeURIComponent("Website Inquiry - ArMil Engineering");
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    );
+    try {
+      await emailjs.sendForm(
+        "service_hdtlqow",
+        "template_zw6eef4",
+        formRef.current,
+        "LLLFa7fk49l4IGgR7"
+      );
 
-    window.location.href = `mailto:armilengineering@yahoo.com?subject=${subject}&body=${body}`;
+      setStatus({
+        type: "success",
+        message: "Thanks. Your message has been sent successfully.",
+      });
+
+      setForm(initialForm);
+      formRef.current.reset();
+    } catch (error) {
+      console.error("Floating chat EmailJS error:", error);
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      });
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -32,9 +62,13 @@ export default function FloatingChatBox() {
           <div className="chat-header">
             <div>
               <strong>Chat with ArMil</strong>
-              <div className="chat-subtitle">Send a quick project inquiry</div>
+              <div className="chat-subtitle">
+                Send a quick project inquiry
+              </div>
             </div>
+
             <button
+              type="button"
               className="chat-icon-btn"
               onClick={() => setOpen(false)}
               aria-label="Close chat"
@@ -43,15 +77,20 @@ export default function FloatingChatBox() {
             </button>
           </div>
 
-          <form className="chat-form" onSubmit={handleSubmit}>
+          <form ref={formRef} className="chat-form" onSubmit={handleSubmit}>
             <input
               type="text"
-              name="name"
+              name="contact"
               placeholder="Your name"
               value={form.name}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange({
+                  target: { name: "name", value: e.target.value },
+                });
+              }}
               required
             />
+
             <input
               type="email"
               name="email"
@@ -60,23 +99,50 @@ export default function FloatingChatBox() {
               onChange={handleChange}
               required
             />
+
             <textarea
-              name="message"
+              name="details"
               placeholder="Tell us about your project..."
               rows="4"
               value={form.message}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange({
+                  target: { name: "message", value: e.target.value },
+                });
+              }}
               required
             />
-            <button type="submit" className="btn btn-primary full">
+
+            <input type="hidden" name="company" value="Website Chat Inquiry" />
+            <input type="hidden" name="phone" value="" />
+            <input type="hidden" name="service" value="Floating Chat Inquiry" />
+            <input type="hidden" name="projectName" value="Website Chat" />
+            <input type="hidden" name="location" value="" />
+            <input type="hidden" name="deadline" value="" />
+            <input type="hidden" name="budget" value="" />
+            <input type="hidden" name="fileLink" value="" />
+            <input type="hidden" name="referralSource" value="Floating Chat Box" />
+
+            <button
+              type="submit"
+              className="btn btn-primary full"
+              disabled={sending}
+            >
               <Send size={16} />
-              Send Inquiry
+              {sending ? "Sending..." : "Send Inquiry"}
             </button>
+
+            {status.message && (
+              <p className={`form-status form-status-${status.type}`}>
+                {status.message}
+              </p>
+            )}
           </form>
         </div>
       )}
 
       <button
+        type="button"
         className="chat-fab"
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Open chat"

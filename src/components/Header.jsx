@@ -4,21 +4,35 @@ import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
+  const [mobileStoreOpen, setMobileStoreOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isServicesActive = location.pathname === "/services";
+  const isResourcesActive = location.pathname === "/resources";
+  const isToolsActive =
+    location.pathname === "/tools" ||
+    location.pathname.startsWith("/tools/");
+  const isStoreActive =
+    location.pathname === "/store" ||
+    location.pathname.startsWith("/store/");
 
   const closeMenu = () => {
     setOpen(false);
     setMobileServicesOpen(false);
     setMobileResourcesOpen(false);
+    setMobileToolsOpen(false);
+    setMobileStoreOpen(false);
   };
 
   const goToSection = (path, sectionId) => {
     closeMenu();
-
     sessionStorage.setItem("pendingSectionScroll", sectionId);
 
     if (location.pathname === path) {
@@ -30,6 +44,21 @@ export default function Header() {
       }, 50);
     } else {
       navigate(path);
+    }
+  };
+
+  const goToHashSection = (path, hashId) => {
+    closeMenu();
+
+    if (location.pathname === path) {
+      setTimeout(() => {
+        const element = document.getElementById(hashId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    } else {
+      navigate(`${path}#${hashId}`);
     }
   };
 
@@ -48,8 +77,36 @@ export default function Header() {
     return () => clearTimeout(timer);
   }, [location]);
 
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const hashId = location.hash.replace("#", "");
+    const timer = setTimeout(() => {
+      const element = document.getElementById(hashId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [location]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 18);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="site-header fixed-header">
+    <header
+      className={`site-header fixed-header ${
+        scrolled ? "header-scrolled" : ""
+      }`}
+    >
       <div className="container header-inner">
         <NavLink to="/" className="brand" onClick={closeMenu}>
           <div className="brand-logo">
@@ -83,8 +140,8 @@ export default function Header() {
           <div className="nav-dropdown">
             <NavLink
               to="/services"
-              className={({ isActive }) =>
-                isActive
+              className={() =>
+                isServicesActive
                   ? "nav-link active nav-dropdown-trigger"
                   : "nav-link nav-dropdown-trigger"
               }
@@ -155,29 +212,163 @@ export default function Header() {
             Projects
           </NavLink>
 
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Contact
-          </NavLink>
+          <div className="nav-dropdown">
+            <NavLink
+              to="/tools"
+              className={() =>
+                isToolsActive
+                  ? "nav-link active nav-dropdown-trigger"
+                  : "nav-link nav-dropdown-trigger"
+              }
+            >
+              <span>Tools</span>
+              <ChevronDown size={15} />
+            </NavLink>
 
-          <NavLink
-            to="/quote"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Quote
-          </NavLink>
+            <div className="nav-dropdown-menu">
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/tools", "all-tools")}
+              >
+                All Tools
+              </button>
+
+              <NavLink
+                to="/tools/steel-weight"
+                className="nav-dropdown-link"
+                onClick={closeMenu}
+              >
+                Steel Weight Calculator
+              </NavLink>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToHashSection("/tools", "plate-weight-calculator")
+                }
+              >
+                Plate Weight Calculator
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToHashSection("/tools", "weld-size-calculator")
+                }
+              >
+                Weld Size Calculator
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToHashSection("/tools", "bolt-weight-calculator")
+                }
+              >
+                Bolt Weight Calculator
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() =>
+                  goToHashSection("/tools", "hss-pipe-reference")
+                }
+              >
+                HSS / Pipe Reference
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/tools", "beam-size-lookup")}
+              >
+                Beam Size Lookup
+              </button>
+            </div>
+          </div>
+
+          <div className="nav-dropdown">
+            <NavLink
+              to="/store"
+              className={() =>
+                isStoreActive
+                  ? "nav-link active nav-dropdown-trigger"
+                  : "nav-link nav-dropdown-trigger"
+              }
+            >
+              <span>Store</span>
+              <ChevronDown size={15} />
+            </NavLink>
+
+            <div className="nav-dropdown-menu">
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "all-products")}
+              >
+                All Products
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "custom-components")}
+              >
+                Custom Components
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "tekla-macros")}
+              >
+                Tekla Macros
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "report-templates")}
+              >
+                Report Templates
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "drawing-styles")}
+              >
+                Drawing Styles
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "numbering-rules")}
+              >
+                Numbering Rules
+              </button>
+
+              <button
+                type="button"
+                className="nav-dropdown-link"
+                onClick={() => goToHashSection("/store", "environment-packs")}
+              >
+                Environment Packs
+              </button>
+            </div>
+          </div>
 
           <div className="nav-dropdown">
             <NavLink
               to="/resources"
-              className={({ isActive }) =>
-                isActive
+              className={() =>
+                isResourcesActive
                   ? "nav-link active nav-dropdown-trigger"
                   : "nav-link nav-dropdown-trigger"
               }
@@ -240,6 +431,24 @@ export default function Header() {
               </button>
             </div>
           </div>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Contact
+          </NavLink>
+
+          <NavLink
+            to="/quote"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Quote
+          </NavLink>
         </nav>
 
         <div className="header-actions">
@@ -251,6 +460,7 @@ export default function Header() {
             className="mobile-btn"
             onClick={() => setOpen(!open)}
             type="button"
+            aria-label="Toggle menu"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -330,9 +540,155 @@ export default function Header() {
               </div>
             )}
 
-            <NavLink to="/projects" onClick={closeMenu}>
+            <NavLink 
+              to="/projects" 
+              className={({ isActive }) => 
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
               Projects
             </NavLink>
+
+            <button
+              type="button"
+              className="mobile-dropdown-trigger"
+              onClick={() => setMobileToolsOpen(!mobileToolsOpen)}
+            >
+              <span>Tools</span>
+              <ChevronDown
+                size={16}
+                className={mobileToolsOpen ? "rotate-icon" : ""}
+              />
+            </button>
+
+            {mobileToolsOpen && (
+              <div className="mobile-submenu">
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/tools", "all-tools")}
+                >
+                  All Tools
+                </button>
+
+                <NavLink to="/tools/steel-weight" onClick={closeMenu}>
+                  Steel Weight Calculator
+                </NavLink>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/tools", "plate-weight-calculator")
+                  }
+                >
+                  Plate Weight Calculator
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/tools", "weld-size-calculator")
+                  }
+                >
+                  Weld Size Calculator
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/tools", "bolt-weight-calculator")
+                  }
+                >
+                  Bolt Weight Calculator
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/tools", "hss-pipe-reference")
+                  }
+                >
+                  HSS / Pipe Reference
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/tools", "beam-size-lookup")}
+                >
+                  Beam Size Lookup
+                </button>
+              </div>
+            )}
+
+            <button
+              type="button"
+              className="mobile-dropdown-trigger"
+              onClick={() => setMobileStoreOpen(!mobileStoreOpen)}
+            >
+              <span>Store</span>
+              <ChevronDown
+                size={16}
+                className={mobileStoreOpen ? "rotate-icon" : ""}
+              />
+            </button>
+
+            {mobileStoreOpen && (
+              <div className="mobile-submenu">
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/store", "all-products")}
+                >
+                  All Products
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/store", "custom-components")
+                  }
+                >
+                  Custom Components
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/store", "tekla-macros")}
+                >
+                  Tekla Macros
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/store", "report-templates")
+                  }
+                >
+                  Report Templates
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/store", "drawing-styles")}
+                >
+                  Drawing Styles
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToHashSection("/store", "numbering-rules")}
+                >
+                  Numbering Rules
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToHashSection("/store", "environment-packs")
+                  }
+                >
+                  Environment Packs
+                </button>
+              </div>
+            )}
 
             <NavLink to="/contact" onClick={closeMenu}>
               Contact

@@ -8,6 +8,9 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
 import Resources from "./pages/Resources";
+import StorePage from "./pages/Store";
+import ToolsPage from "./pages/Tools";
+import SteelWeightCalculator from "./pages/SteelWeightCalculator";
 
 export default function App() {
   return (
@@ -24,6 +27,9 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/tools" element={<ToolsPage />} />
+          <Route path="/tools/steel-weight" element={<SteelWeightCalculator />} />
         </Routes>
       </main>
 

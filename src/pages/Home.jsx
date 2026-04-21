@@ -24,22 +24,22 @@ import FloatingChatBox from "../components/FloatingChatBox";
 const whyArmil = [
   {
     title: "Precision",
-    text: "Every deliverable is built around clarity, constructability, and technical accuracy.",
+    text: "Every deliverable is developed with clarity, technical accuracy, and practical application in mind.",
     icon: ShieldCheck,
   },
   {
     title: "Buildability",
-    text: "We focus on real-world fabrication and field conditions, not just theoretical output.",
+    text: "We focus on solutions that support fabrication, coordination, and real project conditions.",
     icon: Wrench,
   },
   {
     title: "Coordination",
-    text: "We help connect design intent, detailing workflows, and project team communication.",
+    text: "Our workflow supports stronger communication between design, detailing, and project teams.",
     icon: LayoutTemplate,
   },
   {
     title: "Reliable Support",
-    text: "Responsive revisions, field updates, and project follow-through support successful delivery.",
+    text: "We provide responsive revisions, updates, and project follow-through when support is needed.",
     icon: BadgeCheck,
   },
 ];
@@ -70,20 +70,20 @@ const constructionTools = [
 ];
 
 const funContent = [
-  "Guess the Connection",
+  "Project Highlights",
   "Steel Price Trend Widget",
   "Before / After Tekla Gallery",
   "Tekla Model Photo Gallery",
-  "Steel Memes",
-  "Detailer Quizzes",
+  "Industry Visuals",
+  "Featured Project Views",
 ];
 
 const seoContent = [
   "Glossary of Steel Terms",
   "Tekla Tips Blog",
   "Case Studies",
-  "Free Checklists",
-  "Premium Checklists",
+  "Field Coordination Articles",
+  "Technical Checklists",
   "Detailing Guides",
 ];
 
@@ -188,11 +188,11 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.05 }}
           >
             <div className="mini-pill">Technical Excellence</div>
-            <h3>Steel detailing, Tekla support, and practical tools for real projects</h3>
+            <h3>Steel detailing, Tekla support, and practical project solutions</h3>
             <p>
-              ArMil Engineering &amp; Detailing now goes beyond portfolio presentation.
-              We support fabrication, coordination, estimation, and digital workflow
-              improvement with practical tools, expert support, and industry-focused resources.
+              ArMil Engineering &amp; Detailing provides steel detailing, Tekla
+              modeling, coordination support, and practical technical resources to
+              help projects move forward with clarity, accuracy, and confidence.
             </p>
           </motion.div>
 
@@ -229,16 +229,16 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.12 }}
           >
-            <div className="mini-pill">Free Tools</div>
-            <h3>Traffic-driving tools visitors will actually use</h3>
+            <div className="mini-pill">Tools</div>
+            <h3>Practical tools for steel detailing and estimating workflows</h3>
             <p>
-              Add useful free tools to increase traffic, improve SEO, and keep
-              estimators, fabricators, engineers, and detailers coming back.
+              Access useful calculators and reference tools designed to support
+              steel detailing, estimating, and fabrication-related project needs.
             </p>
             <FeatureGrid items={freeTools} icon={Calculator} />
             <div style={{ marginTop: "18px" }}>
               <NavLink to="/tools" className="btn btn-primary">
-                Explore Free Tools <ArrowRight size={16} />
+                Explore Tools <ArrowRight size={16} />
               </NavLink>
             </div>
           </motion.div>
@@ -250,16 +250,16 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.14 }}
           >
-            <div className="mini-pill">Tekla Store</div>
-            <h3>Turn your expertise into paid Tekla products</h3>
+            <div className="mini-pill">Digital Resources</div>
+            <h3>Tekla tools, templates, and workflow resources</h3>
             <p>
-              Offer downloadable Tekla tools and templates that create value for
-              other detailers while opening a new revenue stream for ArMil.
+              Explore developing digital resources and workflow-focused tools
+              designed to support Tekla users, detailers, and steel project teams.
             </p>
             <FeatureGrid items={teklaStoreItems} icon={Store} />
             <div style={{ marginTop: "18px" }}>
               <NavLink to="/store" className="btn btn-primary">
-                Visit Tekla Store <ArrowRight size={16} />
+                Visit Store <ArrowRight size={16} />
               </NavLink>
             </div>
           </motion.div>
@@ -271,11 +271,11 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.16 }}
           >
-            <div className="mini-pill">Construction Tools</div>
-            <h3>Free and premium tools for estimators, PMs, and fabricators</h3>
+            <div className="mini-pill">Project Support Tools</div>
+            <h3>Technical tools for project planning and workflow support</h3>
             <p>
-              Mix helpful free tools with advanced paid tools so the site supports
-              both lead generation and product sales.
+              A growing collection of tools intended to support estimation,
+              coordination, material review, and steel project planning.
             </p>
             <FeatureGrid items={constructionTools} icon={Boxes} />
             <div style={{ marginTop: "18px" }}>
@@ -293,10 +293,10 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.18 }}
           >
             <div className="mini-pill">Before / After</div>
-            <h3>Engineering visualization with presentation impact</h3>
+            <h3>From concept to completed steel presentation</h3>
             <p>
-              Compare conceptual/model-driven visuals with project-ready
-              presentation output to show coordination quality and detailing clarity.
+              Compare concept visuals with finished project presentation to
+              highlight detailing quality, coordination, and overall project clarity.
             </p>
             <BeforeAfterSlider />
           </motion.div>
@@ -308,11 +308,12 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <div className="mini-pill">Fun & Engagement</div>
-            <h3>Make the website memorable and worth revisiting</h3>
+            <div className="mini-pill">Industry Highlights</div>
+            <h3>Visual content and featured steel-related updates</h3>
             <p>
-              Add light, professional engagement features that fit the steel and
-              detailing world while increasing repeat visits.
+              Highlight selected visuals, project features, and steel-focused
+              content that reflects the practical side of detailing and
+              coordination work.
             </p>
             <FeatureGrid items={funContent} icon={SmilePlus} />
           </motion.div>
@@ -324,11 +325,11 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.22 }}
           >
-            <div className="mini-pill">SEO Content</div>
-            <h3>Build authority with content that ranks and sells</h3>
+            <div className="mini-pill">Resources</div>
+            <h3>Technical articles, references, and project insights</h3>
             <p>
-              Educational content helps your website rank better, attract search
-              traffic, and support both service inquiries and digital product sales.
+              Explore selected resources covering steel detailing concepts,
+              drawing practices, field coordination, and related technical topics.
             </p>
             <FeatureGrid items={seoContent} icon={BookOpen} />
             <div style={{ marginTop: "18px" }}>
@@ -350,10 +351,10 @@ export default function Home() {
                 <div className="icon-badge">
                   <Calculator size={20} />
                 </div>
-                <h3>Need estimation or take-off support?</h3>
+                <h3>Need detailing or project support?</h3>
                 <p>
-                  Request a quote for detailing, take-offs, modeling, connection support,
-                  or field-driven project revisions.
+                  Request a quote for steel detailing, take-offs, Tekla modeling,
+                  connection support, or field-related revisions.
                 </p>
                 <NavLink to="/quote" className="btn btn-primary">
                   Request a Quote <ArrowRight size={16} />
@@ -364,13 +365,13 @@ export default function Home() {
                 <div className="icon-badge">
                   <Package size={20} />
                 </div>
-                <h3>Want ready-to-use Tekla products?</h3>
+                <h3>Looking for workflow resources?</h3>
                 <p>
-                  Explore downloadable macros, components, templates, and detailing
-                  resources built for practical workflows.
+                  Explore tools, templates, and developing digital resources
+                  designed to support practical detailing workflows.
                 </p>
                 <NavLink to="/store" className="btn btn-secondary">
-                  Browse Store
+                  Browse Resources
                 </NavLink>
               </div>
 
@@ -378,10 +379,10 @@ export default function Home() {
                 <div className="icon-badge">
                   <MessageCircle size={20} />
                 </div>
-                <h3>Need quick help?</h3>
+                <h3>Need to discuss a project?</h3>
                 <p>
-                  Use the chat box on the lower right to send a fast project inquiry
-                  or ask about services, tools, and deliverables.
+                  Use the chat box to send a quick inquiry about services,
+                  project requirements, or available support.
                 </p>
                 <NavLink to="/contact" className="btn btn-secondary">
                   Contact Us
@@ -397,17 +398,18 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.26 }}
           >
-            <div className="mini-pill">What’s Coming</div>
-            <h3>A stronger ArMil platform for visitors, leads, and digital sales</h3>
+            <div className="mini-pill">Capabilities</div>
+            <h3>Expanding technical support and digital workflow resources</h3>
             <div className="why-grid">
               <div className="why-item">
                 <div className="icon-badge small">
                   <FileText size={16} />
                 </div>
                 <div>
-                  <div className="why-title">Pricing Structure</div>
+                  <div className="why-title">Structured Support Options</div>
                   <div className="why-text">
-                    Clear pricing for macros, custom components, report templates, and packs.
+                    Flexible support for workflow tools, custom resources, and
+                    project-based needs.
                   </div>
                 </div>
               </div>
@@ -417,9 +419,10 @@ export default function Home() {
                   <PenTool size={16} />
                 </div>
                 <div>
-                  <div className="why-title">Download Store Layout</div>
+                  <div className="why-title">Digital Resource Access</div>
                   <div className="why-text">
-                    A clean product page system for free and paid Tekla downloads.
+                    A dedicated area for presenting workflow resources, templates,
+                    and support tools.
                   </div>
                 </div>
               </div>
@@ -429,9 +432,10 @@ export default function Home() {
                   <Sparkles size={16} />
                 </div>
                 <div>
-                  <div className="why-title">Calculator Logic</div>
+                  <div className="why-title">Technical Tool Development</div>
                   <div className="why-text">
-                    Interactive React calculators to make the site more useful and searchable.
+                    Ongoing development of practical calculators and technical
+                    reference tools.
                   </div>
                 </div>
               </div>
